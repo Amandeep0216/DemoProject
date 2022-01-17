@@ -19,6 +19,7 @@ register = (event)=>{
         password: this.password.value,
         phone:this.phone.value*1,
         dob: this.dob.value,
+        isActive:false
     }
 
     fetch(`http://localhost:8080/web/register`,{
@@ -28,8 +29,13 @@ register = (event)=>{
       },
       body : JSON.stringify(ob)
   }).then(response=>response.json()).then(data=>{
+    if(data.status){
       console.log(data)
       this.setState({regmsg:"Successfully Registered"})
+    }
+     else{
+      this.setState({regmsg:"Already Exists"})
+     }
   });;
 
     console.log(ob)
